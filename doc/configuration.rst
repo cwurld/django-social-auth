@@ -30,6 +30,7 @@ Application Setup
         'social_auth.backends.contrib.livejournal.LiveJournalBackend',
         'social_auth.backends.contrib.orkut.OrkutBackend',
         'social_auth.backends.contrib.foursquare.FoursquareBackend',
+        'social_auth.backends.contrib.flickr.FlickrBackend',
         'social_auth.backends.contrib.github.GithubBackend',
         'social_auth.backends.contrib.vk.VKOAuth2Backend',
         'social_auth.backends.contrib.live.LiveBackend',
@@ -41,7 +42,9 @@ Application Setup
     )
 
   Take into account that backends **must** be defined in AUTHENTICATION_BACKENDS_
-  or Django won't pick them up when trying to authenticate the user.
+  or Django won't pick them up when trying to authenticate the user. If you are missing the backend, you will
+  see the exception "Incorrect authentication service". If you do not see the backend you are looking for in
+  this list, look in the social_auth.backends.contrib directory.
 
   Don't miss ``django.contrib.auth.backends.ModelBackend`` if using ``django.contrib.auth``
   User model or users won't be able to login.
@@ -493,8 +496,8 @@ add this to your template::
 
     {% url "socialauth_begin" "backend-name" %}
 
-Backend name can be found on ``BACKENDS`` attribute in the backend module. The
-same URL works for association accounts for logged in users.
+Backend name can be found on ``BACKENDS`` attribute in the backend module 
+(e.g. social_auth.backends.contrib.linkedin.py). The same URL works for association accounts for logged in users.
 
 For social account disconnection, there are two URLs, one to disconnect all
 social accounts for a given backend (not really useful IMO)::
